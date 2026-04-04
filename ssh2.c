@@ -461,7 +461,7 @@ PHP_FUNCTION(ssh2_set_timeout)
 {
 	LIBSSH2_SESSION *session;
 	zval *zsession;
-	zend_long seconds, microseconds;
+	zend_long seconds, microseconds = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS(), "rl|l", &zsession, &seconds, &microseconds) == FAILURE) {
 		return;
