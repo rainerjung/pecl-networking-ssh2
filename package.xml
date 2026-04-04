@@ -31,9 +31,9 @@
         <email>pollita@php.net</email>
         <active>no</active>
     </lead>
-    <date>2024-02-09</date>
+    <date>2026-04-04</date>
     <version>
-        <release>1.4.1</release>
+        <release>1.5.0</release>
         <api>1.0</api>
     </version>
     <stability>
@@ -42,9 +42,19 @@
     </stability>
     <license uri="http://www.php.net/license">PHP License</license>
     <notes>
-        - End zend_function_entry ssh2_functions list with PHP_FE_END [PR #67] (Gerdriaan Mulder)
-        - Remove implicit switch-case fallthrough [PR #66] (Gerdriaan Mulder)
-        - Windows build setup with GitHub Actions [PR #75] (Derick Rethans)
+        - PIE (PHP Installer for Extensions) compatibility
+        - Fix crash on ECDSA pubkey auth due to libssh2 allocator mismatch [PR #92] (Fixes #91, #84)
+        - Fix fragment part of path lost for files with # in name [PR #93] (Fixes #90)
+        - Fix segfault when disconnecting with open SFTP streams [PR #94] (Fixes #81)
+        - Add ssh2_keepalive_config() and ssh2_keepalive_send() [PR #95] (Fixes #79)
+        - Add ssh2_set_timeout() [PR #70] (Jille Timmermans)
+        - Add ssh2_send_signal() [PR #89] (herrecito)
+        - Fix ssh2_poll() rejecting valid resource inputs [PR #96] (Fixes #82)
+        - Fix Homebrew libssh2 autodetection on macOS Apple Silicon [Fixes #87]
+        - Initialize php_stream_wrapper_ops explicitly [PR #68] (Gerdriaan Mulder)
+        - Bump minimum PHP version to 8.0
+        - Drop PHP 8.0 from CI, add PHP 8.5
+        - Fix Windows CI (setup-php-sdk TLS issue)
     </notes>
     <contents>
         <dir name="/">
@@ -54,6 +64,7 @@
             <file role="src" name="php_ssh2.h"/>
             <file role="src" name="ssh2_fopen_wrappers.c"/>
             <file role="src" name="ssh2_sftp.c"/>
+            <file role="doc" name="composer.json"/>
             <file role="doc" name="LICENSE"/>
             <file role="doc" name="README.md"/>
             <dir name="tests">
@@ -64,7 +75,10 @@
                 <file role="test" name="ssh2_auth_pubkey_file.phpt"/>
                 <file role="test" name="ssh2_connect.phpt"/>
                 <file role="test" name="ssh2_exec.phpt"/>
+                <file role="test" name="ssh2_keepalive.phpt"/>
+                <file role="test" name="ssh2_poll.phpt"/>
                 <file role="test" name="ssh2_send_eof.phpt"/>
+                <file role="test" name="ssh2_send_signal.phpt"/>
                 <file role="test" name="ssh2_sftp_001.phpt"/>
                 <file role="test" name="ssh2_sftp_002.phpt"/>
                 <file role="test" name="ssh2_shell.phpt"/>
@@ -91,6 +105,18 @@
         <configureoption name="with-ssh2" default="autodetect" prompt="libssh2 prefix?"/>
     </extsrcrelease>
     <changelog>
+        <release>
+            <date>2024-02-09</date>
+            <version>
+                <release>1.4.1</release>
+                <api>1.0</api>
+            </version>
+            <notes>
+                - End zend_function_entry ssh2_functions list with PHP_FE_END [PR #67] (Gerdriaan Mulder)
+                - Remove implicit switch-case fallthrough [PR #66] (Gerdriaan Mulder)
+                - Windows build setup with GitHub Actions [PR #75] (Derick Rethans)
+            </notes>
+        </release>
         <release>
             <date>2023-04-15</date>
             <version>
