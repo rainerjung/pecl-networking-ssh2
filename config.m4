@@ -62,6 +62,15 @@ if test "$PHP_SSH2" != "no"; then
     -L$SSH2_DIR/lib -lm
   ])
 
+  PHP_CHECK_LIBRARY(ssh2,libssh2_channel_signal_ex,
+  [
+    AC_DEFINE(PHP_SSH2_CHANNEL_SIGNAL, 1, [Have libssh2 with channel signal support])
+  ],[
+    AC_MSG_WARN([libssh2 < 1.9.0, channel signal support not available])
+  ],[
+    -L$SSH2_DIR/lib -lm
+  ])
+
   PHP_SUBST(SSH2_SHARED_LIBADD)
 
   PHP_NEW_EXTENSION(ssh2, ssh2.c ssh2_fopen_wrappers.c ssh2_sftp.c, $ext_shared)

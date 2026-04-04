@@ -1493,6 +1493,7 @@ PHP_FUNCTION(ssh2_fetch_stream)
 }
 /* }}} */
 
+#ifdef PHP_SSH2_CHANNEL_SIGNAL
 /* {{{ proto bool ssh2_send_signal(stream channel, string signal)
  * Sends a signal to a stream.
  */
@@ -1503,7 +1504,7 @@ PHP_FUNCTION(ssh2_send_signal)
 	zval *zparent;
 	zend_string *signal;
 	int ssh2_ret;
-	
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS(), "rS", &zparent, &signal) == FAILURE) {
 		return;
 	}
@@ -1528,6 +1529,8 @@ PHP_FUNCTION(ssh2_send_signal)
 
 	RETURN_TRUE;
 }
+/* }}} */
+#endif
 
 /* {{{ proto stream ssh2_send_eof(stream channel)
  * Sends EOF to a stream. Primary use is to close stdin of an stdio stream.
